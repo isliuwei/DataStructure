@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Javascript数组</title>
+  <meta name="description" content="1.1 Javascript中数组的定义">
+
+  <link rel="stylesheet" href="/DataStructure/css/main.css">
+  <link rel="canonical" href="http://isliuwei.com/DataStructure/jekyll/update/2016/08/09/Javascript%E6%95%B0%E7%BB%84.html">
+  <link rel="alternate" type="application/rss+xml" title="DataStructure & Javascript" href="http://isliuwei.com/DataStructure/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/DataStructure/">DataStructure & Javascript</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/DataStructure/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Javascript数组</h1>
+    <p class="post-meta"><time datetime="2016-08-09T10:56:57+08:00" itemprop="datePublished">Aug 9, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="javascript">1.1 Javascript中数组的定义</h3>
+
+<h4 id="section">1.1.1 定义</h4>
+
+<p>数组的标准定义是:<code class="highlighter-rouge">一个存储元素的线性集合(collection),元素可以通过索引来任意存取,索引通常是数字,用来计算元素之间存储位置的偏移量。</code></p>
+
+<p>JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引是该对象的属性。这些数字索引在内部被转换为字符串类型,这是因为 JavaScript 对象中 的属性名必须是字符串。</p>
+
+<h4 id="section-1">1.1.2 使用数组</h4>
+
+<blockquote>
+  <h5 id="section-2">创建数组</h5>
+</blockquote>
+
+<p>方法一：最简单的方式通过[]操作符声明一个数组变量：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">numArr</span> <span class="o">=</span> <span class="p">[];</span></code></pre></figure>
+
+<blockquote>
+  <p>使用这种方式创建的数组，是一个长度为0的空数组。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 显示 0</span></code></pre></figure>
+
+<p>方法二：在声明数组变量时，直接在[]操作符内放入一组元素：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">numArr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 显示 5</span></code></pre></figure>
+
+<p>方法二：调用Array构造函数创建数组：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">numArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 显示 0</span></code></pre></figure>
+
+<p>同样，可以在构造函数传入一组元素作为数组的初始值：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">numArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 显示 5</span></code></pre></figure>
+
+<p>最后，注意一点：<code class="highlighter-rouge">在调用Array的构造函数时，如果只传一个数值参数，该数值参数用来指定创建数组的长度：</code></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">numArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numArr</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 显示 10,初始值均为 undefined</span></code></pre></figure>
+
+<p>在脚本语言常见的一个特性是，<code class="highlighter-rouge">数组中的元素不必是同一种数据类型。</code>如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">multiArr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Jack'</span><span class="p">,</span><span class="s1">'23'</span><span class="p">,</span><span class="s1">'China'</span><span class="p">,</span><span class="kc">true</span><span class="p">,</span><span class="kc">null</span><span class="p">];</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">数组检测：调用ECMAScript5中新增的 Array.isArray()来判断一个对象是否是数组。</code>如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">];</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">num</span><span class="p">));</span>  <span class="c1">// 显示 false</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>  <span class="c1">// 显示 true</span></code></pre></figure>
+
+<blockquote>
+  <p>创建数组的几种方式。哪种方式最好？
+<code class="highlighter-rouge">大多数 JavaScript 专家推荐使用 [] 操作符,和使用 Array 的构造函数相比,这种方式被认为效率更高。</code></p>
+</blockquote>
+
+<blockquote>
+  <h5 id="section-3">读写数组</h5>
+</blockquote>
+
+<p>在一条赋值语句中，可以使用 [ ] 操作符将数据赋给数组，也可以使用 [ ] 操作符读取数组中的元素。</p>
+
+<h4 id="section-4">1.1.3 由字符串生成数组</h4>
+
+<p><code class="highlighter-rouge">调用字符串对象的split()方法可以生成数组。</code></p>
+
+<p>该方法通过一些常见的分隔符,比如分隔单词的空格逗号等,将一个字符串分成几部分,并将每部分作为一个元素保存于一个新建的数组中。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">sentence</span> <span class="o">=</span> <span class="s2">"I love Javascript"</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="nx">sentence</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">words</span><span class="p">));</span>  <span class="c1">//  显示 true</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">words</span><span class="p">);</span> <span class="c1">//  显示 ["I", "love", "Javascript"]</span></code></pre></figure>
+
+<h4 id="section-5">1.1.4 对数组的整体性操作</h4>
+
+<blockquote>
+  <h4 id="section-6">数组的复制</h4>
+</blockquote>
+
+<p>当把一个数组赋值给另外一个数组时，只是为被赋值的数组增加了一个新的引用。也就是说当修改一个数组的值时，另一个数组的值也会改变。</p>
+
+<blockquote>
+  <p>因为数组也是对象，是引用类型。赋值时，只是数组的变量的栈值相等，但是它们指向的还是同一块堆内存。</p>
+</blockquote>
+
+<p>下面代码展示了这种情况：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">);</span>  <span class="c1">//  显示  [1, 2, 3, 4]</span>
+  <span class="nx">arr1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">);</span>  <span class="c1">//  显示 [100, 2, 3, 4]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr1</span> <span class="o">===</span> <span class="nx">arr2</span><span class="p">);</span>   <span class="c1">// 显示 true</span></code></pre></figure>
+
+<p>这种行为被称为<code class="highlighter-rouge">浅复制</code>，新数组依然指向原来的数组。
+最好的方法是使用<code class="highlighter-rouge">深复制</code>，将原数组中的每一个元素都复制到一份到新的数组中。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">copy</span><span class="p">(</span><span class="nx">arr1</span><span class="p">,</span> <span class="nx">arr2</span><span class="p">){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">arr1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="nx">arr2</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">var</span> <span class="nx">oldArr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">copy</span><span class="p">(</span><span class="nx">oldArr</span><span class="p">,</span><span class="nx">newArr</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newArr</span><span class="p">);</span>  <span class="c1">// 显示 [1, 2, 3, 4]</span>
+  <span class="nx">oldArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">oldArr</span><span class="p">);</span>  <span class="c1">// 显示 [100, 2, 3, 4]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newArr</span><span class="p">);</span>  <span class="c1">// 显示 [1, 2, 3, 4]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newArr</span> <span class="o">===</span> <span class="nx">oldArr</span><span class="p">);</span> <span class="c1">// 显示 false</span></code></pre></figure>
+
+<h3 id="section-7">1.2 存取数组的函数</h3>
+
+<h4 id="section-8">1.2.1 查找元素</h4>
+
+<p><code class="highlighter-rouge">indexOf()</code>函数，用来查找传进来的参数在目标数组中是否存在。</p>
+
+<p>如果目标数组包含该参数，就返回该元素在数组中的索引；如果不包含，就返回 -1。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'lisi'</span><span class="p">,</span><span class="s1">'wangwu'</span><span class="p">,</span><span class="s1">'zhaoliu'</span><span class="p">];</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'zhaoliu'</span><span class="p">));</span>  <span class="c1">// 显示 2</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'liuwei'</span><span class="p">));</span> <span class="c1">// 显示 -1</span></code></pre></figure>
+
+<p>如果数组中包含多个相同的元素，<code class="highlighter-rouge">indexOf()</code>函数总是返回<code class="highlighter-rouge">第一个</code>与参数相同的元素的索引。</p>
+
+<p>有另外一个功能与之类似的函数：<code class="highlighter-rouge">lastIndexOf()</code>,该函数返回相同元素中最后一个元素的索引。如果没找到相同的元素，则返回 -1。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'lisi'</span><span class="p">,</span><span class="s1">'wangwu'</span><span class="p">,</span><span class="s1">'zhaoliu'</span><span class="p">,</span><span class="s1">'lisi'</span><span class="p">];</span>  
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s1">'lisi'</span><span class="p">));</span>  <span class="c1">// 显示 3</span></code></pre></figure>
+
+<h4 id="section-9">1.2.2 数组的字符串表示</h4>
+
+<p>有两个方法可以将数组转换成字符串：<code class="highlighter-rouge">join()</code>和<code class="highlighter-rouge">toString()</code>。</p>
+
+<p>这两个方法都返回一个包含数组所有元素的字符串，各元素之间用逗号分隔开。其中，<code class="highlighter-rouge">join()</code>参数可以指定进行分隔的分隔符。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"I"</span><span class="p">,</span><span class="s2">"love"</span><span class="p">,</span><span class="s2">"you"</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">str3</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str1</span><span class="p">);</span>  <span class="c1">//  显示  I,love,you</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str2</span><span class="p">);</span>  <span class="c1">//  显示  I love you</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str3</span><span class="p">);</span>  <span class="c1">//  显示  I,love,you</span></code></pre></figure>
+
+<h4 id="section-10">1.2.3 由已有数组创建新数组</h4>
+
+<p><code class="highlighter-rouge">concat()</code>和<code class="highlighter-rouge">slice()</code>方法允许通过已有数组创建新数组。</p>
+
+<p><code class="highlighter-rouge">concat()</code>方法可以合并多个数组创建一个新数组，<code class="highlighter-rouge">slice()</code>方法截取一个数组的子集创建一个新数组。</p>
+
+<p><code class="highlighter-rouge">待续。。。。。。</code></p>
+
+<h3 id="section-11">1.3 可变函数</h3>
+
+<h4 id="section-12">1.3.1 为数组添加元素</h4>
+
+<p>有两个方法可以为数组添加元素：<code class="highlighter-rouge">push()</code>和<code class="highlighter-rouge">unshift()</code>。</p>
+
+<p><code class="highlighter-rouge">push()</code>方法可向数组的末尾添加一个或多个元素，并返回新的长度。</p>
+
+<p><code class="highlighter-rouge">unshift()</code> 方法可向数组的开头添加一个或更多元素，并返回新的长度。
+<code class="highlighter-rouge">unshift()</code>方法无法在 Internet Explorer 中正确地工作。</p>
+
+<p>如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">length1</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">length1</span><span class="p">);</span> <span class="c1">//  显示  6</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr1</span><span class="p">);</span>  <span class="c1">//  显示  [1,2,3,4,5,6]</span>
+  <span class="kd">var</span> <span class="nx">length2</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">length2</span><span class="p">);</span> <span class="c1">//  显示  10</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr1</span><span class="p">);</span>  <span class="c1">//  显示  [1,2,3,4,5,6,7,8,9,10]</span>
+  <span class="kd">var</span> <span class="nx">arr0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">length3</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr0</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">length3</span><span class="p">);</span> <span class="c1">//  显示  11</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr1</span><span class="p">);</span>  <span class="c1">//显示  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, [11, 12, 13, 14]]</span></code></pre></figure>
+
+<blockquote>
+  <p>说明：传入的参数为数组中的元素，而非数组。如果传入一个数组，只会把数组当作一个元素处理。如上所示，往数组中push一个数组，长度只增加一。</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">unshift()</code>方法的实现：因为在数组的开头添加元素远比在末尾难度大。如果不利用<code class="highlighter-rouge">unshift()</code>，则需要把后面的每个元素都相应地向后移动一个位置。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">){</span>
+    <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+  <span class="p">}</span>
+  <span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="c1">//显示 [0, 1, 2, 3, 4]</span></code></pre></figure>
+
+<h4 id="section-13">1.3.2 从数组中删除元素</h4>
+
+<p>有两个方法可以为数组删除元素：<code class="highlighter-rouge">pop()</code>和<code class="highlighter-rouge">shift()</code>。</p>
+
+<p>使用 <code class="highlighter-rouge">pop()</code> 方法可以删除数组末尾的元素，并返回数组的最后一个元素。</p>
+
+<p>使用 <code class="highlighter-rouge">shift()</code> 方法可以删除数组的第一个元素，并返回数组的第一个元素。</p>
+
+<p><code class="highlighter-rouge">pop()</code> 和 <code class="highlighter-rouge">shift()</code> 方法都将删掉的元素作为方法的返回值返回,因此可以使用一个变量来保存删除的元素。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+  <span class="nx">num1</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">num1</span><span class="p">);</span>  <span class="c1">//  显示 [2, 3, 4]</span>
+  <span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">num2</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">first</span><span class="p">);</span> <span class="c1">//  显示 1</span>
+  </code></pre></figure>
+
+<h4 id="section-14">1.3.3 从数组中间位置添加和删除元素</h4>
+
+<p>使用<code class="highlighter-rouge">splice()</code>方法可以为数组添加、删除或者替换元素，根据参数的不同实现不同的功能。并返回被删除的项目。该方法会改变原始数组。</p>
+
+<p>使用<code class="highlighter-rouge">splice()</code>方法需要提供如下参数：</p>
+
+<p>第一个参数，起始索引（规定添加/删除项目的位置，使用负数可从数组结尾处规定位置）</p>
+
+<p>第二个参数，需要删除的元素的个数(添加元素是该参数设为0)</p>
+
+<p>第三个参数，想要添加进数组的元素。</p>
+
+<p>示例一：使用<code class="highlighter-rouge">splice()删除</code>元素</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">del</span> <span class="o">=</span> <span class="nx">nums</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span>  <span class="c1">//  显示  [3,4,5]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">del</span><span class="p">);</span> <span class="c1">//  显示  [1,2]</span>
+  </code></pre></figure>
+
+<p>示例二：使用<code class="highlighter-rouge">splice()添加</code>元素</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+  <span class="nx">nums</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span>  <span class="c1">//  显示  [1,2,3,4,5]</span>
+  </code></pre></figure>
+
+<p>示例三：使用<code class="highlighter-rouge">splice()替换</code>元素</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">8</span><span class="p">];</span>
+  <span class="nx">nums</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span>  <span class="c1">//  显示  [1, 2, 3, 4, 5, 6, 7, 8]</span>
+  </code></pre></figure>
+
+<h4 id="section-15">1.3.4 为数组排序</h4>
+
+<p><code class="highlighter-rouge">reverse()</code> 方法用于颠倒数组中元素的顺序。该方法会改变原来的数组，而不会创建新的数组。</p>
+
+<p><code class="highlighter-rouge">sort()</code>方法用于对数组的元素进行排序。该方法会改变原来的数组，而不会创建新的数组。</p>
+
+<p>排序的都是按照字符串的字母顺序进行排序的。</p>
+
+<p>如下示例：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'cd'</span><span class="p">,</span><span class="s1">'ac'</span><span class="p">,</span><span class="s1">'ab'</span><span class="p">,</span><span class="s1">'aa'</span><span class="p">,</span><span class="s1">'zs'</span><span class="p">];</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">reverse</span><span class="p">());</span> <span class="c1">//  显示  ["zs", "aa", "ab", "ac", "cd"]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">());</span>  <span class="c1">//  显示  ["aa", "ab", "ac", "cd", "zs"]</span></code></pre></figure>
+
+<p>但是如果数组元素是数字类型，<code class="highlighter-rouge">sort()</code>方法的排序结果如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">200</span><span class="p">];</span>
+  <span class="nx">nums</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span>  <span class="c1">//  显示  [1, 100, 11, 2, 200, 3, 4]</span></code></pre></figure>
+
+<p>为了实现按照数字大小的顺序进行排序，需要给<code class="highlighter-rouge">sort()</code>方法传入一个比较函数。</p>
+
+<p>如果按照<code class="highlighter-rouge">升序</code>排序：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">compare</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">compare</span><span class="p">);</span></code></pre></figure>
+
+<p>如果按照<code class="highlighter-rouge">降序</code>排序：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">function</span> <span class="nx">compare</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">arr</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">compare</span><span class="p">);</span></code></pre></figure>
+
+<p>如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">nums1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">200</span><span class="p">];</span>
+  <span class="nx">nums1</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums1</span><span class="p">);</span> <span class="c1">//  显示  [1, 2, 3, 4, 11, 100, 200]</span>
+
+  <span class="kd">var</span> <span class="nx">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">43</span><span class="p">,</span><span class="mi">200</span><span class="p">];</span>
+  <span class="nx">nums2</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nums2</span><span class="p">);</span> <span class="c1">//  显示  [200, 43, 30, 11, 10, 2, 1]</span></code></pre></figure>
+
+<h3 id="iterator-">1.4 迭代器( Iterator )方法</h3>
+
+<p>迭代方法是对数组中每个元素应用一个函数，可以返回一个值、一组值或者一个新数组。</p>
+
+<p>该函数会接收3个参数：数组每项的<code class="highlighter-rouge">值(item)</code>、该项在数组中的<code class="highlighter-rouge">索引(index)</code>和数组对象<code class="highlighter-rouge">本身(array)</code>。</p>
+
+<h4 id="section-16">1.4.1 不生成新数组的迭代器方法</h4>
+
+<p><code class="highlighter-rouge">♦️ forEach()函数</code></p>
+
+<p>该方法接收一个函数作为参数，对数组中的每个元素使用该函数。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">power</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">nums</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="nx">power</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="o">*</span><span class="nx">index</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">power</span><span class="p">);</span> <span class="c1">// 显示 [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">♦️ every()函数</code></p>
+
+<p>该方法接受一个返回值为布尔类型的函数,对数组中的每个元素使用该函数。</p>
+
+<p>如果对于所有的元素,该函数均返回true,则该方法返回true。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">num1</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">isEven</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"all numbers are even!"</span><span class="p">);</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"not all numbers are even!"</span><span class="p">);</span>
+  <span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>上述运行输出结果： all numbers are even!</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">♦️ some()函数</code></p>
+
+<p>该方法也接受一个返回值为布尔类型的函数。</p>
+
+<p>只要有一个元素使得该函数返回 true,该方法就返回 true。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">num1</span><span class="p">.</span><span class="nx">some</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">isEven</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"some numbers are even!"</span><span class="p">);</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"no numbers are even!"</span><span class="p">);</span>
+  <span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>上述运行输出结果： some numbers are even!</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">♦️ reduce()函数</code><br />
+<code class="highlighter-rouge">♦️ reduceRight()函数</code></p>
+
+<p>该方法会从一个累加值开始,不断对累加值和数组中的后续元素调用该函数,直到数组中的最后一个元素,最后返回得到的累加值。</p>
+
+<p>传给<code class="highlighter-rouge">reduce()</code>和<code class="highlighter-rouge">reduceRight()</code>的函数接收4个参数：<code class="highlighter-rouge">前一个值(prev)</code>、<code class="highlighter-rouge">当前值(cur)</code>、<code class="highlighter-rouge">项的索引(index)</code>和数组本身的<code class="highlighter-rouge">对象(array)</code>。</p>
+
+<p>这两个函数的区别就是方向不同，<code class="highlighter-rouge">reduce()</code>函数从第一个开始遍历，<code class="highlighter-rouge">reduceRight()</code>函数从最后一个开始遍历。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span>
+  <span class="nx">num1</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">prev</span><span class="p">,</span><span class="nx">cur</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">prev</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">prev</span><span class="o">+</span><span class="s2">" + "</span><span class="o">+</span><span class="nx">cur</span><span class="o">+</span><span class="s2">" = "</span><span class="o">+</span><span class="nx">sum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">sum</span><span class="p">;</span>
+  <span class="p">});</span></code></pre></figure>
+
+<blockquote>
+  <p>上述运行输出结果：</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">
+  1 + 2 = 3
+  3 + 3 = 6
+  6 + 4 = 10
+  10 + 5 = 15
+  15
+</code></p>
+
+<h4 id="section-17">1.4.2 生成新数组的迭代器方法</h4>
+
+<p>有两个迭代方法可以产生新数组：<code class="highlighter-rouge">map()</code>和<code class="highlighter-rouge">filter()</code>。</p>
+
+<p><code class="highlighter-rouge">map()</code>函数与<code class="highlighter-rouge">forEach()</code>函数功能相同，对数组每个元素使用某个函数，区别是它会返回一个新的数组。</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">words</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Do"</span><span class="p">,</span><span class="s2">"It"</span><span class="p">,</span><span class="s2">"Yourself"</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">letters</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">item</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">letters</span><span class="p">);</span>   <span class="c1">// 显示  ["D", "I", "Y"]</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">letters</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">""</span><span class="p">));</span>    <span class="c1">//  显示 DIY</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">filter()</code>和 <code class="highlighter-rouge">every()</code> 类似,传入一个返回值为布尔类型的函数。和 <code class="highlighter-rouge">every()</code> 方法不同的是, 当对数组中的所有元素应用该函数,结果均为 true 时,该方法并不返回 true,而是返回 一个新数组,该数组包含应用该函数后结果为 true 的元素。</p>
+
+<p>下面是一个例子:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  
+  <span class="kd">var</span> <span class="nx">grades</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">20</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">grades</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">101</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">grades</span><span class="p">);</span>  
+<span class="c1">//[47, 17, 8, 67, 21, 68, 71, 83, 74, 21, 73, 39, 74, 85, 22, 99, 96, 51, 0, 89]</span>
+  <span class="kd">var</span> <span class="nx">passGrades</span> <span class="o">=</span> <span class="nx">grades</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">item</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">passGrades</span><span class="p">);</span>  
+<span class="c1">//[67, 68, 71, 83, 74, 73, 74, 85, 99, 96, 89]</span></code></pre></figure>
+
+<p>￼</p>
+
+<p>I hope you are enjoy stay here!
+Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">DataStructure & Javascript</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>DataStructure & Javascript</li>
+          <li><a href="mailto:lw.588@163.com">lw.588@163.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/isliuwei"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">isliuwei</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/nce16220811"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">nce16220811</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
