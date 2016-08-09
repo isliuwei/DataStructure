@@ -1,0 +1,274 @@
+---
+layout: post
+title:  "let和const命令"
+date:   2016-07-20 18:32:57 +0800
+categories: jekyll update
+---
+## 1.1 let命令
+
+#### 基本用法
+
+`ES6`新增`let`命令，用于`声明变量`。
+其用法类似于`var`，但是所声明的变量只在`let命令所在的代码块内`有效。
+
+{% highlight javascript %}
+{
+    let a = 10;
+    var b = 1;
+}
+console.log(a);  // a is not defined
+console.log(b);  // 1
+{% endhighlight %}
+
+for循环的计数器，适合使用let命令。
+
+{% highlight javascript %}
+for(let i = 0; i < arr.length; i++){}
+console.log(i);  //
+{% endhighlight %}
+
+以上代码中计数器i，只在for循环体内有效。
+
+比较以下两段代码的输出结果：
+
+{% highlight javascript %}
+var a = [];
+for(var i=0; i<10; i++){
+  a[i] = function(){
+    console.log(i);
+  };
+}
+a[6]();   // 10
+{% endhighlight %}
+
+{% highlight javascript %}
+var a = [];
+for(let i=0; i<10; i++){
+  a[i] = function(){
+    console.log(i);
+  };
+}
+a[6]();   // 6
+{% endhighlight %}
+
+
+#### 不存在变量提升
+
+let不存在`变量提升`。所以，`变量一定要在声明后使用`。
+
+#### 不允许重复声明
+
+let不允许在相同作用域内重复声明同一个变量。
+
+{% highlight javascript %}
+//不报错
+function(){
+  var a = 10;
+  var a = 1;
+}
+
+//报错
+function(){
+  let a = 10;
+  var a = 1;
+}
+
+//报错
+function(){
+  var a = 10;
+  let a = 1;
+}
+
+//报错
+function(){
+  let a = 10;
+  let a = 1;
+}
+{% endhighlight %}
+
+## 1.2 块级作用域
+
+ES5中只有全局作用域和函数作用域，没有块级作用域。
+这会带来一下问题。
+
+问题一：内层变量可能会覆盖外层变量。
+
+{% highlight javascript %}
+var tmp = new Date();
+function fn(){
+  console.log(tmp);
+  if(false){
+    var tmp = "hello world";
+  }
+}
+fn(); // undefined
+
+{% endhighlight %}
+
+>函数fn执行后，输出结果为 undefiend ，原因在于变量提升导致内层的 tmp 变量覆盖了外层的 tmp 变量。
+
+问题二：用来计数的循环变量泄露为全局变量。
+
+{% highlight javascript %}
+
+var str = 'hello';
+for(var i = 0; i < str.length; i++){
+  console.log(str[i]);
+}
+console.log(i); // 5
+
+{% endhighlight %}
+
+####  ES的块级作用域
+
+let实际上为Javascipt新增了`块级作用域`。
+
+{% highlight javascript %}
+
+function f1(){
+  let n = 5;
+  if(true){
+    let n = 10;
+  }
+  console.log(n); //5
+}
+
+
+function f1(){
+  var n = 5;
+  if(true){
+    var n = 10;
+  }
+  console.log(n); //10
+}
+
+{% endhighlight %}
+
+>当用 let 声明变量时，外层代码不受内层代码块的影响。如果使用 var 由于变量提升并且只有函数作用域，导致内层的变量覆盖了外层变量。
+
+>ES6 允许块级作用域任意嵌套。
+
+>内层作用域可以定义外层作用域的同名变量。
+
+## 1.3 const命令
+`const用来声明常量。`一旦声明，其值就不能改变。
+
+{% highlight javascript %}
+
+const PI = 3.1415;
+console.log(PI);  //  3.1415
+PI = 3;
+console.log(PI);  //  PI is read-only
+
+{% endhighlight %}
+
+>改变常量的值（const 定义）会报错。const 声明的常量不得改变值。
+>const 一旦声明常量，就必须立即初始化，不能留到以后赋值。
+
+{% highlight javascript %}
+
+const foo;  //  const variables must have an initializer
+......
+
+{% endhighlight %}
+
+>对于 const 而言,只声明不赋值就会报错。
+
+const 作用域与 let 命令相同：`只在声明所在的块级作用域内有效。`
+
+const 命令的常量也`不提升,`同样存在暂时性死区,只能在`声明后使用。`
+
+const 也`不能重复声明常量。`
+
+对于复合型的变量,变量名不指向数据,而是指向数据所在的地址。
+const 命令只是保证变量指向的地址不变,并不保证该地址指向的数据不变。
+
+{% highlight javascript %}
+
+const foo = {};
+foo.prop = 123;
+
+console.log(foo.prop);  //  123
+
+{% endhighlight %}
+
+>常量 foo 储存的是一个地址，指向一个对象。不可变的只是这个地址，即不能把 foo 指向另一个地址，但对象本身不可变的,所以依然可以为其添加新的属性。
+
+{% highlight javascript %}
+
+const a = [];
+a.push('Hello');  //  可执行
+a.length = 0;   //  可执行
+a = ['world'];  //  报错
+
+{% endhighlight %}
+>常量 a 是一个数组，这个数组本身可写的但是无法给另一个数组赋值给 a。
+
+`冻结对象 Object.freeze`
+
+>阻止修改现有属性的特性和值，并阻止添加新属性。
+>Object.freeze(object)
+>参数 object 必需。在其上锁定特性的对象。
+
+{% highlight javascript %}
+const foo = Object.freeze({});    //  不起作用
+{% endhighlight %}
+
+>常量指向一个冻结的对象。所以添加新属性不起作用。
+
+### 1.4 全局对象的属性
+
+全局对象在客户端浏览器环境指的是window对象。在Node.js中指的是global对象。
+
+在ES5中,全局对象的属性与全局变量是等价的。
+
+ES6中规定：`var和function命令声明的全局变量依旧是全局对象的属性；let命令、const命令和class命令声明的全局变量不属于全局对象的属性。`
+
+{% highlight javascript %}
+var a = 1;
+//如果在Node.js的REPL环境，可以写成global.a
+//或者采用通用方法,写成this.a
+window.a; // 1
+
+let b = 1;
+window.b; //  undefiend
+
+{% endhighlight %}
+>全局变量 a 由 var 命令声明,所以是全局对象的属性；全局变量 b 由 let 命令声明,所以不是全局对象的属性，返回 undefiend。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I hope you are enjoy stay here!
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: http://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
