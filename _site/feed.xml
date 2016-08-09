@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
+    <title>ES6标准入门</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Aug 2016 10:42:45 +0800</pubDate>
-    <lastBuildDate>Tue, 09 Aug 2016 10:42:45 +0800</lastBuildDate>
+    <link>http://isliuwei.com/ES6/</link>
+    <atom:link href="http://isliuwei.com/ES6/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 29 Jul 2016 21:20:42 +0800</pubDate>
+    <lastBuildDate>Fri, 29 Jul 2016 21:20:42 +0800</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -27,9 +27,9 @@
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 09 Aug 2016 10:39:28 +0800</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2016/08/09/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2016/08/09/welcome-to-jekyll.html</guid>
+        <pubDate>Wed, 20 Jul 2016 18:32:57 +0800</pubDate>
+        <link>http://isliuwei.com/ES6/jekyll/update/2016/07/20/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://isliuwei.com/ES6/jekyll/update/2016/07/20/welcome-to-jekyll.html</guid>
         
         
         <category>jekyll</category>
@@ -258,8 +258,8 @@ Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll doc
 
 </description>
         <pubDate>Wed, 20 Jul 2016 18:32:57 +0800</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2016/07/20/%E6%95%B0%E7%BB%84.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2016/07/20/%E6%95%B0%E7%BB%84.html</guid>
+        <link>http://isliuwei.com/ES6/jekyll/update/2016/07/20/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4.html</link>
+        <guid isPermaLink="true">http://isliuwei.com/ES6/jekyll/update/2016/07/20/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4.html</guid>
         
         
         <category>jekyll</category>
