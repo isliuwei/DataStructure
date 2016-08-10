@@ -20,3 +20,8 @@ github_username:  isliuwei
 
 # Build settings
 markdown: kramdown
+
+# Paginate Setting
+paginate: 1
+paginate_path: "page:num"
+

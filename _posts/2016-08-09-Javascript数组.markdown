@@ -6,6 +6,10 @@ categories: jekyll update
 ---
 ### 1.1 Javascript中数组的定义
 
+更多详细资料，请参看[MDN开发者文档] [MDN开发者文档]
+
+[MDN开发者文档]: https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array
+
 #### 1.1.1 定义
 
 数组的标准定义是:`一个存储元素的线性集合(collection),元素可以通过索引来任意存取,索引通常是数字,用来计算元素之间存储位置的偏移量。`
@@ -251,6 +255,51 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
   console.log(arr); //显示 [0, 1, 2, 3, 4]
 
 {% endhighlight %}
+
+>考虑 `push()` 和 `contact()` 两者的区别
+
+看下面的代码：
+
+{% highlight javascript %}
+
+  var arr1 = [1,2,3];
+  var arr2 = [4,5,6];
+  var arr3 = arr1.concat(arr2);
+
+  console.log(arr3.length); //  显示 6
+  console.log(arr3); // 显示 [1, 2, 3, 4, 5, 6]
+
+  var arr3 = [1,2,3];
+  var arr4 = [4,5,6];
+  var len = arr3.push(arr4);
+
+  console.log(len); //  显示 4
+  console.log(arr3.length); //  显示 4
+  console.log(arr3); // 显示 [1, 2, 3, [4, 5, 6]]
+
+{% endhighlight %}
+
+由上述代码可以看出两者区别在于：
+
+①返回值不同。`concat()`返回的是的新生成的数组，而`push()`返回数组新的长度（`length` 属性值）。
+②实现机制不同。`push()` 遇到数组参数时，把整个数组参数作为一个元素；而 `concat()` 则是拆开数组参数，一个元素一个元素地加进去。
+`push()` 直接改变当前数组；`concat()` 不改变当前数组，而是生成新的数组。
+
+`push()`也可以通过调用`apply()`方法合并数组，实现`concat()`一样的效果。如下所示：
+
+{% highlight javascript %}
+
+  var arr1 = [1,2,3];
+  var arr2 = [4,5,6];
+  Array.prototype.push.apply(arr1,arr2);
+  // arr1.push.apply(arr1,arr2);
+  console.log(arr1);  // 显示 [1, 2, 3, 4, 5, 6]
+
+{% endhighlight %}
+
+
+
+
 
 #### 1.3.2 从数组中删除元素
 
@@ -524,7 +573,79 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 {% endhighlight %}
 
 
-### 1.5 ECMAScript6 数组的扩展
+### 1.5 二维和多维数组
+
+#### 1.5.1 创建二维数组
+
+二维数组类似一种由行和列构成的数据表格。在JavaScript中创建二维数组,需要先创建一个数组,然后让数组的每个元素也是一个数组。
+通过扩展JavaScript数组对象,为 其增加了一个新方法,该方法根据传入的参数,设定了数组的行数、列数和初始值。
+下面是这个方法的定义:
+
+{% highlight javascript %}
+  
+  Array.martix = function(row,col,init){
+    var arr = [];
+    for(var i=0; i<row; i++){
+      var colArr = [];
+      for(var j=0; j<col; j++){
+        colArr[j] = init;
+      }
+      arr[i] = colArr;
+    }
+    return arr;
+  }
+
+  console.log(Array.martix(5,5,0));
+  /*运行结果：
+  [ 
+    [ 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0 ],
+    [ 0, 0, 0, 0, 0 ] 
+  ]
+  */
+
+{% endhighlight %}
+
+#### 1.5.2 处理二维数组元素
+
+处理二维数组中的元素,有两种最基本的方式:按列访问和按行访问。对于两种方式,我们均使用一组嵌入式的 for 循环。对于按列访问,外层循环对应行,内 层循环对应列。
+
+如下所示：
+
+{% highlight javascript %}
+  
+  var grades = [[90,78,65,49],[99,87,57,79],[100,38,85,49],[89,67,86,59]];
+  var total = 0;
+  var average = 0;
+  for( var row=0; row<grades.length; row++ ){
+      for( var col=0; col<grades[row].length; col++){
+        total+=grades[row][col];
+      }
+    console.log("学生"+(row+1)+" average:"+total/grades[row].length);
+    total = 0;
+    average = 0;
+  }
+
+  /*运行结果：
+
+    学生1 average:70.5
+    学生2 average:80.5
+    学生3 average:68
+    学生4 average:75.25
+
+  */
+
+{% endhighlight %}
+
+>内层循环由下面这个表达式控制: `col < grades[row].length` 这个表达式之所以可行,是因为每一行都是一个数组,我们可以使用数组的 length 属性判断每行包含多少列。
+
+>对于参差不齐的稀疏数组 JavaScript 处理方法不变，因为每一行的长度是可以通过计算得到的。
+
+
+
+### 1.6 ECMAScript6 数组的扩展
 
 `♦️♦️ Array.from() 函数`
 
@@ -649,7 +770,7 @@ function ArrayOf(){
 
 `[1,2,NaN].findOf(elem => Object.is(NaN,elem))`返回 2
 
-♦️ 关于 Object.is()方法与" === "操作符 ♦️
+♦️ 关于 `Object.is()`方法与`" === "`操作符 ♦️
 
 {% highlight javascript %}
 
@@ -666,7 +787,7 @@ function ArrayOf(){
 
 `♦️♦️ includes()函数`
 
-数组实例的includes()方法返回一个布尔值，表示某个数组是否包含给定的值。
+数组实例的`includes()`方法返回一个布尔值，表示某个数组是否包含给定的值。
 
 {% highlight javascript %}
 
@@ -676,9 +797,9 @@ function ArrayOf(){
 
 {% endhighlight %}
 
-indexOf方法也可以检查是否包含某个值。
+`indexOf`方法也可以检查是否包含某个值。
 
-indexOf方法存在两个缺点：①不够语义化，其含义是找到参数值的第一出线位置，所以要比较是否不等以-1，表达不够直观；②其内部使用严格相等运算符(===)进行判断，会导致对NaN出现误判。
+`indexOf`方法存在两个缺点：①不够语义化，其含义是找到参数值的第一出线位置，所以要比较是否不等以-1，表达不够直观；②其内部使用严格相等运算符(===)进行判断，会导致对NaN出现误判。
 
 `[NaN].indexOf(NaN)`返回 -1
 
@@ -691,137 +812,7 @@ indexOf方法存在两个缺点：①不够语义化，其含义是找到参数�
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-￼
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+When you do something beautiful and nobody noticed,do not be sad. For the sun every morning is aabeautiful spectacle and yet most of the audience still sleeps.
 
 
 

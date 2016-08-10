@@ -1,0 +1,62 @@
+---
+layout: post
+title:  "将一个二维数组扁平化"
+date:   2016-08-10 11:09:09 +0800
+categories: jekyll subLink
+---
+
+#### 问题：如何将一个二维数组扁平化为一个一维数组。
+
+`方法一：用contact()和apply()将一个二维数组扁平化`
+
+代码如下：
+
+{% highlight javascript %}
+	
+	//生成二维数组的函数 martix()
+	Array.martix = function(row,col){
+	  	var arr = [];
+	  	for(var i=0; i<row; i++){
+	  		var colArr = [];
+	  		for(var j=0; j<col; j++){
+	  			colArr[j] = parseInt(Math.random()*100);
+	  		}
+	  	arr[i] = colArr;
+	  	}
+	  	return arr;
+	}
+
+	//生成新的二维数组 arr
+	var arr = Array.martix(3,3);
+	console.log(arr);	// 显示 [[81, 28, 3], [73, 44, 1], [30, 35, 61]]
+
+	//二维数组扁平化
+	var newArr = Array.prototype.concat.apply([],arr);
+	// var newArr = arr.concat.apply([],arr);
+	console.log(newArr);	// 显示  [81, 28, 3, 73, 44, 1, 30, 35, 61]
+
+{% endhighlight %}
+
+分析：
+`Array`对象`concat()`方法接收一个或多个数组，并且将数组元素附加到用来调用该方法的父数组的内容的末尾。合并的数组作为一个新的数组返回。
+使用`apply()`方法，可以给定一个参数的数组，应用将要调用的函数(`concat`)。在本例中，参数的数组就是最初的多维数组。为了能够工作，要给`apply()`传递一个空的数组作为第一个参数，因为`concat()`通过将该数组链接到一个已有的数组上而工作。
+
+`方法二：用contact()和reduce()将一个二维数组扁平化`
+
+{% highlight javascript %}
+	
+[[81, 28, 3], [73, 44, 1], [30, 35, 61]].reduce(function(prev,cur,index,array){
+	return prev.concat(cur);
+});
+
+// 显示  [81, 28, 3, 73, 44, 1, 30, 35, 61]
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
