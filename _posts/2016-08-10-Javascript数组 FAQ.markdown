@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Javascript数组"
-date:   2016-08-09 10:56:57 +0800
+title:  "Javascript数组 FAQ"
+date:   2016-08-09 23:17:09 +0800
 categories: jekyll update
 ---
 ### 1.1 Javascript中数组的定义
