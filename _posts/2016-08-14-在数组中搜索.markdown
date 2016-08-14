@@ -1,0 +1,133 @@
+---
+layout: post
+title:  "在数组中搜索"
+date:   2016-08-14 18:42:55 +0800
+categories: jekyll subLink
+---
+
+#### 问题：想要在数组中搜索一个特定值，如果找到的话，获取该数组元素的索引。
+
+`♦️♦️ indexOf()`：方法返回给定元素能找在数组中找到的第一个索引值，否则返回-1。
+
+`♦️♦️ lastIndexOf()`：方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 
+-1。从数组的后面向前查找，从 fromIndex 处开始。
+
+`♦️♦️ findIndex()`：方法用来查找数组中某指定元素的索引, 如果找不到指定的元素, 则返回 -1。`ES6`
+
+`♦️♦️ find()`：方法返回数组中满足测试条件的一个元素，如果没有满足条件的元素，则返回 undefined。`ES6`
+
+
+`indexOf()` 
+
+语法：`arr.indexOf(searchElement[, fromIndex = 0])`
+
+参数：`searchElement 要查找的元素` `fromIndex 开始查找的位置`
+
+`demo: 判断一个元素是否在数组里，不在则更新数组`
+
+代码如下：
+
+{% highlight javascript %}
+	
+	var updateArr = function(arr,elem)
+  	{
+		if(arr.indexOf(elem) === -1)
+		{
+			arr.push(elem);
+			console.log(arr);
+		}
+		else if(arr.indexOf(elem) > -1)
+		{
+			console.log('exist');
+		}
+	}
+
+	var arr = [1,2,3];
+	updateArr(arr,4);	// 显示	[ 1, 2, 3, 4 ]
+	updateArr(arr,5);	// 显示	[ 1, 2, 3, 4, 5 ]
+	updateArr(arr,4);	// 显示	exist
+
+{% endhighlight %}
+
+`lastIndexOf()` 
+
+语法：`arr.lastIndexOf(searchElement[, fromIndex = arr.length - 1])`
+
+参数：`searchElement 要查找的元素` `fromIndex 从此位置开始逆向查找`
+
+`demo: 查找所有元素`
+
+代码如下：
+
+{% highlight javascript %}
+	
+	var indices = [];
+	var array = ['a', 'b', 'a', 'c', 'a', 'd'];
+	var element = 'a';
+	var idx = array.lastIndexOf(element);
+
+	while (idx != -1) 
+	{
+	  indices.unshift(idx);
+	  idx = (idx > 0 ? array.lastIndexOf(element, idx - 1) : -1);
+	}
+
+	console.log(indices);
+
+
+{% endhighlight %}
+
+`findIndex()`
+
+语法：`arr.findIndex(callback[, thisArg])`
+
+参数：
+
+`callback 针对数组中的每个元素, 都会执行该回调函数, 执行时会自动传入下面三个参数:
+element 当前元素。
+index 当前元素的索引。
+array 调用findIndex的数组。
+thisArg 可选的。执行 callback 时作为 this对象 的值。`
+
+`demo: 查找数组中首个质数元素的索引`
+
+代码如下：
+
+{% highlight javascript %}
+
+	function isPrime(element, index, array) {
+	    var start = 2;
+	    while (start <= Math.sqrt(element)) {
+	        if (element % start++ < 1) return false;
+	    }
+	    return (element > 1);
+	}
+
+	console.log( [4, 6, 8, 12].findIndex(isPrime) ); // -1, 没找到质数元素
+	console.log( [4, 6, 7, 12].findIndex(isPrime) ); // 2
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
