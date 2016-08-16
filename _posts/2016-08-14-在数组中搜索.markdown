@@ -108,7 +108,6 @@ thisArg 可选的。执行 callback 时作为 this对象 的值。`
 
 {% endhighlight %}
 
-<<<<<<< HEAD
 `find()`
 
 语法：`arr.find(callback[, thisArg])`
@@ -137,8 +136,7 @@ thisArg 可选的。执行 callback 时作为 this对象 的值。`
 
 {% endhighlight %}
 
-=======
->>>>>>> origin/gh-pages
+
 
 
 
