@@ -1,0 +1,314 @@
+---
+layout: post
+title:  "Javascript数据结构 -- 栈 stack"
+date:   2016-08-17 11:02:45 +0800
+categories: jekyll update
+---
+### Javascript数据结构 -- 栈 stack
+
+#### 栈的抽象数据类型定义 ADT
+
+| 属性 / 方法               | 作用                          | 
+| ----------------------- |-----------------------------:| 
+| top                     | 记录栈顶元素的位置               | 
+| push                    | 元素入栈          			 |   
+| pop                     | 元素出栈          			 | 
+| peek                    | 返回栈顶元素        			 | 
+| clear                   | 清除栈内所有元素                | 
+| length                  | 栈内元素的个数                  | 
+| ------------------------|------------------------------| 
+  
+
+#### Stack 类的实现 
+
+`Stack 类的构造函数`
+
+{% highlight javascript %}
+
+function List() {
+	this.top = 0;
+	this.dataStore = [];
+	this.push = push;
+	this.pop = pop;
+	this.peek = peek;
+	this.length = length;
+	this.clear = clear;
+}
+
+{% endhighlight %}
+
+
+
+`🇨🇳 push: 入栈 - 向栈中压入一个元素`
+
+> 当向栈中压入一个新元素时,需要将其保存在数组中变量 top 所对应的位置,然后将 top 值加 1,让其指向数组中下一个空位置。这里要特别注意 ++ 操作符的位置,它放在 this.top 的后面,这样新入栈的元素就被放在 top 的当前值对应的位置,然后再将变量 top 的值加 1,指向下一个位置。
+
+{% highlight javascript %}
+
+	function push(element){
+		this.dataStore[this.top++] = element;
+	}
+	
+{% endhighlight %}
+
+
+
+
+`🇨🇳 pop: 出栈 - 元素出栈并返回栈顶元素`
+
+> pop() 方法恰好与 push() 方法相反——它返回栈顶元素,同时将变量 top 的值减 1。
+
+{% highlight javascript %}
+
+	function pop(){
+		return this.dataStore[--this.top];
+	}
+	
+{% endhighlight %}
+
+
+
+`🇨🇳 peek: 返回栈顶元素`
+
+> 返回数组的第 top-1 个位置的元素,即栈顶元素。如果对一个空栈调用 peek() 方法,结果为 undefined。这是因为栈是空的,栈顶没有任何
+元素。
+
+{% highlight javascript %}
+
+	function peek(){
+		return this.dataStore[this.top-1];
+	}
+	
+{% endhighlight %}
+
+
+`🇨🇳 length: 返回栈的长度`
+
+> length() 方法通过返回变量 top 值的方式返回栈 内的元素个数。
+
+{% highlight javascript %}
+
+	function length(){
+		return this.top;
+	}
+	
+{% endhighlight %}
+
+
+`🇨🇳 clear: 清空栈`
+
+> 可以将变量 top 的值设为 0,清空一个栈。
+
+{% highlight javascript %}
+
+	function clear(){
+		this.top = 0;
+	}
+	
+{% endhighlight %}
+
+
+#### Stack 类的完整实现
+
+{% highlight javascript %}
+
+	function Stack(){
+		this.top = 0;
+		this.dataStore = [];
+		this.push = push;
+		this.pop = pop;
+		this.peek = peek;
+		this.length = length;
+		this.clear = clear;
+	}
+
+	function push(element){
+		this.dataStore[this.top++] = element;
+	}
+
+	function pop(){
+		return this.dataStore[--this.top];
+	}
+
+	function peek(){
+		return this.dataStore[this.top-1];
+	}
+
+	function length(){
+		return this.top;
+	}
+
+	function clear(){
+		this.top = 0;
+	}
+
+
+	var s = new Stack();
+	s.push("David");
+	s.push("Raymond");
+	s.push("Bryan");
+	print("length: " + s.length());
+	print(s.peek());
+	var popped = s.pop();
+	print("The popped element is: " + popped);
+	print(s.peek());
+	s.push("Cynthia");
+	print(s.peek());
+	s.clear();
+	print("length: " + s.length());
+	print(s.peek());
+	s.push("Clayton");
+	print(s.peek());
+
+	
+	/****************显示结果****************/
+		length: 3
+		Bryan
+		The popped element is: Bryan
+		Raymond
+		Cynthia
+		length: 0
+		undefined
+		Clayton
+	/*************************************/
+
+	
+{% endhighlight %}
+
+
+#### 使用Stack类
+
+#### 数制间的相互转换
+
+`利用栈将一个数字从一种数制转换成另一种数制。假设想将数字 n 转换为以 b 为基数的数字,实现转换的算法如下。
+(1) 最高位为 n % b,将此位压入栈。
+(2) 使用n/b代替n。
+(3) 重复步骤 1 和 2,直到 n 等于 0,且没有余数。
+(4) 持续将栈内元素弹出,直到栈为空,依次将这些元素排列,就得到转换后数字的字符串形式。`
+
+
+{% highlight javascript %}
+
+function mulBase(num,base){
+	var s = new Stack();
+	do{
+		s.push(num%base);
+		num = Math.floor(num/base);
+	}while(num>0)
+
+	var converted = "";
+	while(s.length()>0){
+		converted+=s.pop();
+	}
+	return converted;
+}
+
+/*****测试*****/
+console.log(numBase(125,8));	//	显示 175
+
+
+{% endhighlight %}
+
+
+
+
+#### 回文
+
+`使用栈,可以轻松判断一个字符串是否是回文。我们将拿到的字符串的每个字符按从左至 右的顺序压入栈。当字符串中的字符都入栈后,栈内就保存了一个反转后的字符串,最后 的字符在栈顶,第一个字符在栈底,字符串完整压入栈内后,通过持续弹出栈中的每个字母就可以得到一个新字符串,该字符 串刚好与原来的字符串顺序相反。我们只需要比较这两个字符串即可,如果它们相等,就 是一个回文。`
+
+{% highlight javascript %}
+
+function isPalindrome(word){
+
+	var s = new Stack();
+	for(var i = 0; i < word.length; i++){
+		s.push(word[i]);
+	}
+	
+	var rword = "";
+	while(s.length() > 0){
+		rword+=s.pop();
+
+	}
+
+	if(word === rword){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+/*****测试*****/
+console.log(isPalindrome('abccba'));	//	显示 true
+console.log(isPalindrome('abcddcab'));	//	显示 false
+
+{% endhighlight %}
+
+
+
+{% highlight javascript %}
+
+
+function fact(num){
+	if(num === 1 || num === 0){
+		return 1;
+
+	}else{
+		return num*fact(num-1);
+	}
+}
+
+
+function fact(num){
+
+	var s = new Stack();
+
+	while(num > 1){
+		s.push( num-- );
+	}
+
+	var result = 1;
+
+	while(s.length > 0){
+		result*=s.pop();
+	}
+	return result;
+}
+
+
+
+{% endhighlight %}
+
+
+#### 递归演示
+
+### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

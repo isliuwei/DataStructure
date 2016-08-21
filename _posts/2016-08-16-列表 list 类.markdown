@@ -1,0 +1,246 @@
+---
+layout: post
+title:  "Javascript数据结构 -- 列表 list 类"
+date:   2016-08-16 21:43:05 +0800
+categories: jekyll update
+---
+### Javascript数据结构 -- 列表 list 类
+
+#### 列表的抽象数据类型定义 ADT
+
+| 属性/方法                 | 作用                          | 
+| ----------------------- |-----------------------------:| 
+| listSize                | 列表的元素个数       		     | 
+| pos                     | 列表的当前位置      			 |   
+| length                  | 返回列表中元素的个数 			 | 
+| clear                   | 清空列表中的所有元素 			 | 
+| toString                | 返回列表的字符串形式              |   
+| getElement              | 返回当前位置的元素               | 
+| insert                  | 在现有元素后插入新元素 		     | 
+| append                  | 在列表的末尾添加新元素  		     |   
+| remove                  | 从列表中删除元素                 | 
+| front                   | 将列表的当前位置设移动到第一个元素   | 
+| end		              | 将列表的当前位置移动到最后一个元素   | 
+| prev                    | 将当前位置前移一位      		  |   
+| next                    | 将当前位置后移一位      		  | 
+| currPos                 | 返回列表的当前位置      		  |   
+| moveTo                  | 将当前位置移动到指定位置     	      |   
+| ------------------------|-------------------------------| 
+  
+
+
+#### 列表类的实现 
+
+`列表类的构造函数`
+
+{% highlight javascript %}
+
+function List() {
+	this.listSize = 0;
+	this.pos = 0;
+	this.dataStore = []; //初始化一个空数组来保存列表元素 
+	this.clear = clear;
+	this.find = find; 
+	this.toString = toString; 
+	this.insert = insert; 
+	this.append = append; 
+	this.remove = remove; 
+	this.front = front;
+	this.end = end;
+	this.prev = prev;
+	this.next = next;
+	this.length = length;
+	this.currPos = currPos;
+	this.moveTo = moveTo;
+	this.getElement = getElement;
+	this.length = length;
+	this.contains = contains;
+}
+
+{% endhighlight %}
+
+`🇨🇳 append: 给列表添加元素`
+
+> 该方法给列表的下一个位置增加一个新的元素,这个位置刚好等于变量 listSize 的值 :
+
+{% highlight javascript %}
+
+	function append(element) {
+    		this.dataStore[this.listSize++] = element;
+	}
+
+{% endhighlight %}
+
+
+`🇨🇳 remove: 从列表中删除元素`
+
+`🇨🇳 find: 在列表中查找某一元素`
+
+
+> 首先,需要在列表中找到该元素,然后删除它,并且调整底层的数组对象以填补删除该元素后留下的空白。我们可以使用 splice( ) 方法简化这一过程。但前提是我们必须找到该元素的位置,我们先定义一个辅助方法 find( ) ,该方法用于查找要删除的元素的位置。
+
+>find( ) 方法通过对数组对象 dataStore 进行迭代,查找给定的元素。如果找到,就返回该 元素在列表中的位置,否则返回 -1,这是在数组中找不到指定元素时返回的标准值。我们 可以在 remove( ) 方法中利用此值做错误校验。
+
+>remove( ) 方法使用 find( ) 方法返回的位置对数组 dataStore 进行截取。数组改变后,将变 量 listSize 的值减 1,以反映列表的最新长度。如果元素删除成功,该方法返回 true,否则返回 false。
+
+{% highlight javascript %}
+
+	function find(element){
+		for(var i = 0; i < this.dataStore.length; i++){
+			if(this.dataStore[i] == element){
+				return i;
+			}
+		}
+		return -1;	
+	}
+
+	function remove(element){
+		var foundAt = this.find(element);
+		if( foundAt > -1 ){
+			this.dataStore.splice(foundAt,1);
+			--this.listSize;
+			return true;
+		}
+		return false;
+	}
+
+
+{% endhighlight %}
+
+`🇨🇳 length: 列表中有多少个元素`
+
+>length( ) 方法返回列表中元素的个数
+
+{% highlight javascript %}
+
+	function length() {
+		return this.listSize;
+	}
+
+{% endhighlight %}
+
+`🇨🇳 toString:显示列表中的元素`
+
+{% highlight javascript %}
+
+	function toString() {
+    		return this.dataStore;
+	}
+
+{% endhighlight %}
+
+
+`🇨🇳 insert: 向列表中插入一个元素`
+
+>insert( ) 方法需要知道将元素插入到什么位置,因此现在 我们假设插入是指插入到列表中某个元素之后。
+
+>insert( ) 方法用到了 find( ) 方法,find( ) 方法会寻找传入的 after 参数在列 表中的位置,找到该位置后,使用 splice( ) 方法将新元素插入该位置之后,然后将变量 listSize 加 1 并返回 true,表明插入成功。
+
+{% highlight javascript %}
+
+	function insert(element, after){
+		var insertPos = this.find(after);
+		if( insertPos > -1 ){
+		    this.dataStore.splice(insertPos+1, 0, element);
+		    ++this.listSize;
+		    return true;
+		}
+		return false;
+	}
+
+{% endhighlight %}
+
+`🇨🇳 clear: 清空列表中所有的元素`
+
+>clear( )方法清空列表中的所有元素,为插入新元素腾出空间。
+
+>clear( ) 方法使用 delete 操作符删除数组 dataStore,接着在下一行创建一个空数组。最
+后一行将 listSize 和 pos 的值设为 1,表明这是一个新的空列表。
+
+{% highlight javascript %}
+
+	function clear() {
+	    delete this.dataStore;
+	    this.dataStore = [];
+	    this.listSize = this.pos = 0;
+	}
+
+{% endhighlight %}
+
+`🇨🇳 contains: 判断给定值是否在列表中`
+
+>contains( )判断一个给定值是否在列表中。
+
+{% highlight javascript %}
+
+	function contains(element){
+	  	for( var i = 0; i < this.dataStore.length; i++){
+		    if( this.dataStore[i] === element){
+		      return true;
+		    }
+	  	}
+	  	return false;
+	}
+
+{% endhighlight %}
+
+`🇨🇳 遍历列表`
+
+>最后的一组方法允许用户在列表上自由移动,最后一个方法 getElement( ) 返回列表的当前元素。
+
+{% highlight javascript %}
+	
+	/*当前位置设置为第一位*/
+	function front() {
+	  this.pos = 0;
+	}
+	
+	/*当前位置设置为最后一位*/
+	function end() {
+	   this.pos = this.listSize-1;
+	}
+
+	/*当前位置向前移动一位*/
+	function prev() {
+	   if (this.pos > 0) {
+	      --this.pos;
+	   }
+	}
+	
+	/*当前位置向后移动一位*/
+	function next() {
+	   if (this.pos < this.listSize-1) {
+	      ++this.pos;
+	   }
+	}
+
+	/*返回当前位置*/
+	function currPos() {
+	   return this.pos;
+	}
+	
+	/*将当前位置移动到指定位置*/
+	function moveTo(position) {
+	   this.pos = position;
+	}
+	
+	/*获取当前位置的元素*/
+	function getElement() {
+	   return this.dataStore[this.pos];
+	}
+
+{% endhighlight %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
