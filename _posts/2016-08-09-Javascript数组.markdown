@@ -157,15 +157,12 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
   console.log(newArr);  // 显示 [1, 2, 3, 4]
   console.log(newArr === oldArr); // 显示 false
 
-<<<<<<< HEAD
+
   
 
   /*使用 forEach 迭代方法实现 深复制*/
-=======
 
 
-  /* 使用 forEach 迭代方法实现 深复制*/
->>>>>>> origin/gh-pages
 
   var arr1 = [1,2,3,4];
   var arr2 = [];
@@ -176,11 +173,9 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
   console.log(arr2);  // 显示 [1, 2, 3, 4]
   console.log(arr1 === arr2);  // 显示 false
 
-<<<<<<< HEAD
-  /* end */
-=======
+
   /* end*/
->>>>>>> origin/gh-pages
+
 
 {% endhighlight %}
 
@@ -344,11 +339,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
   var num2 = [1,2,3,4];
   var first = num2.shift();
   console.log(first); //  显示 1
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
 {% endhighlight %}
 
 #### 1.3.3 从数组中间位置添加和删除元素
@@ -366,57 +357,34 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 示例一：使用`splice()删除`元素
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var nums = [1,2,3,4,5];
   var del = nums.splice(0,2);
   console.log(nums);  //  显示  [3,4,5]
   console.log(del); //  显示  [1,2]
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
 {% endhighlight %}
 
 
 示例二：使用`splice()添加`元素
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-  var nums = [1,2,5];
-  nums.splice(2,0,3,4);
-  console.log(nums);  //  显示  [1,2,3,4,5]
-  
-=======
 
   var nums = [1,2,5];
   nums.splice(2,0,3,4);
   console.log(nums);  //  显示  [1,2,3,4,5]
 
->>>>>>> origin/gh-pages
 {% endhighlight %}
 
 示例三：使用`splice()替换`元素
 
 {% highlight javascript %}
-<<<<<<< HEAD
+
   
   var nums = [1,2,3,4,100,200,300,8];
   nums.splice(4,3,5,6,7);
   console.log(nums);  //  显示  [1, 2, 3, 4, 5, 6, 7, 8]
-  
-=======
 
-  var nums = [1,2,3,4,100,200,300,8];
-  nums.splice(4,3,5,6,7);
-  console.log(nums);  //  显示  [1, 2, 3, 4, 5, 6, 7, 8]
-
->>>>>>> origin/gh-pages
 {% endhighlight %}
 
 #### 1.3.4 为数组排序
@@ -430,11 +398,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 如下示例：
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var arr = ['cd','ac','ab','aa','zs'];
   console.log(arr.reverse()); //  显示  ["zs", "aa", "ab", "ac", "cd"]
   console.log(arr.sort());  //  显示  ["aa", "ab", "ac", "cd", "zs"]
@@ -444,11 +408,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 但是如果数组元素是数字类型，`sort()`方法的排序结果如下所示：
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var nums = [3,2,1,11,100,4,200];
   nums.sort();
   console.log(nums);  //  显示  [1, 100, 11, 2, 200, 3, 4]
@@ -602,11 +562,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 `map()`函数与`forEach()`函数功能相同，对数组每个元素使用某个函数，区别是它会返回一个新的数组。
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var words = ["Do","It","Yourself"];
   var letters = words.map(function(item,index,array){
     return item[0];
@@ -621,11 +577,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 下面是一个例子:
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var grades = [];
   for(var i=0; i<20; i++){
     grades.push(Math.floor(Math.random()*101));
@@ -651,11 +603,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 下面是这个方法的定义:
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   Array.martix = function(row,col,init){
     var arr = [];
     for(var i=0; i<row; i++){
@@ -670,20 +618,13 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 
   console.log(Array.martix(5,5,0));
   /*运行结果：
-<<<<<<< HEAD
-  [ 
-=======
+
   [
->>>>>>> origin/gh-pages
     [ 0, 0, 0, 0, 0 ],
     [ 0, 0, 0, 0, 0 ],
     [ 0, 0, 0, 0, 0 ],
     [ 0, 0, 0, 0, 0 ],
-<<<<<<< HEAD
     [ 0, 0, 0, 0, 0 ] 
-=======
-    [ 0, 0, 0, 0, 0 ]
->>>>>>> origin/gh-pages
   ]
   */
 
@@ -696,11 +637,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 如下所示：
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var grades = [[90,78,65,49],[99,87,57,79],[100,38,85,49],[89,67,86,59]];
   var total = 0;
   var average = 0;
@@ -741,11 +678,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 如下所示：
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var obj = {
     '0' : 'a',
     '1' : 'b',
@@ -753,12 +686,8 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
     'length' : 3
   }
 
-<<<<<<< HEAD
-  var arr1 = Array.prototype.slice.call( obj ); 
-=======
   var arr1 = Array.prototype.slice.call( obj );
 
->>>>>>> origin/gh-pages
   //亦可以写成： var arr1 = [].slice.call( obj );
   console.log(arr1);  //  显示  ["a", "b", "c"]
 
@@ -770,11 +699,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 在实际应用中，常见的类数组的对象是DOM操作返回的`NodeList集合`（具有length属性），以及函数内部的`arguments对象`（保存函数实参，具有length属性）。Array.from都可以将它们转为真正的数组。
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   //  NodeList 对象
   var pList = document.querySelectorAll('p');
   var pArr = Array.from(pList);
@@ -791,11 +716,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 `Array.from`函数还可以接受第二个参数，作用类似于数组的`map`方法，用来对每个数组进行处理，将处理后的值放入返回的新数组。
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var obj = {
     '0' : 1,
     '1' : 2,
@@ -815,11 +736,7 @@ JavaScript 中的数组是一种特殊的对象,用来表示偏移量的索引�
 下面列子展示取出一组DOM结点的文本内容。
 
 {% highlight javascript %}
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> origin/gh-pages
   var pList = document.querySelectorAll('p');
   var pText = Array.from(pList,text => text.textContent);
   console.log(pText);
