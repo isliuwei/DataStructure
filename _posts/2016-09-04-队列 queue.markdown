@@ -1,0 +1,176 @@
+---
+layout: post
+title:  "Javascript数据结构 -- 队列 queue"
+date:   2016-09-04 16:05:35 +0800
+categories: jekyll update
+---
+### Javascript数据结构 -- 队列 queue
+
+#### 队列的抽象数据类型定义 ADT
+
+| 属性 / 方法               | 作用                         |
+| ----------------------- |-----------------------------:|
+| enqueue                 | 元素入队                      |
+| dequeue                 | 元素出对                      |
+| front                   | 返回队首元素                   |
+| back                    | 返回对尾元素                   |
+| toString                | 显示队列内的所有元素             |
+| empty                   | 判断队列是否为空                |
+| ------------------------|------------------------------|
+
+
+
+#### Queue 类的实现
+
+`Queue 类的构造函数`
+
+{% highlight javascript %}
+
+function Queue()
+{
+	this.dataStore = [];
+	this.enqueue = enqueue;
+	this.dequeue = dequeue;
+	this.front = front;
+	this.back = back;
+	this.toString = toString;
+	this.empty = empty;
+}
+
+
+{% endhighlight %}
+
+
+
+`🇨🇳 enqueue: 入队 - 向队尾添加一个元素`
+
+{% highlight javascript %}
+
+  function enqueue(element){
+  	this.dataStore.push(element);
+  }
+
+{% endhighlight %}
+
+
+`🇨🇳 dequeue: 出队 - 删除队首的元素`
+
+{% highlight javascript %}
+
+  function dequeue(){
+      return this.dataStore.shift();
+  }
+
+{% endhighlight %}
+
+
+`🇨🇳 front: 读取队首元素`
+
+{% highlight javascript %}
+
+  function front(){
+      return this.dataStore[0];
+  }
+
+{% endhighlight %}
+
+
+`🇨🇳 back: 读取队尾元素`
+
+{% highlight javascript %}
+
+  function back(){
+      return this.dataStore[this.dataStore.length-1];
+  }
+
+{% endhighlight %}
+
+
+`🇨🇳 toString: 显示队列内的所有元素`
+
+{% highlight javascript %}
+
+  function toString(){
+      var retStr = "";
+      for(var i=0; i<this.dataStore.length; i++){
+        retStr+=this.dataStore[i]+"\n";
+      }
+      return retStr;
+  }
+
+{% endhighlight %}
+
+`🇨🇳 empty: 判断队列是否为空`
+
+{% highlight javascript %}
+
+function empty(){
+  if(this.dataStore.length === 0){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+{% endhighlight %}
+
+
+#### Queue 类的完整实现
+
+{% highlight javascript %}
+
+  function Queue()
+  {
+    this.dataStore = dataStore;
+    this.enqueue = enqueue;
+    this.dequeue = dequeue;
+    this.front = front;
+    this.back = back;
+    this.empty = empty;
+    this.toString = toString;
+  }
+
+  function enqueue(element)
+  {
+    this.dataStore.push(element);
+  }
+
+  function dequeue()
+  {
+    return dataStore.shift();
+  }
+
+  function front()
+  {
+    return this.dataStore[0];
+  }
+
+  function back()
+  {
+    return this.dataStore[this.dataStore.length-1];
+  }
+
+  function empty()
+  {
+    if(this.dataStore.length === 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  function toString()
+  {
+    var retStr = "";
+    for(var i=0; i<this.dataStore.length; i++)
+    {
+      retStr+=this.dataStore[i]+"\n";
+    }
+    return retStr;
+  }
+
+
+{% endhighlight %}

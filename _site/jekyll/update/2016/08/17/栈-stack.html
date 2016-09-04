@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Javascript数据结构 -- 栈 stack</title>
+  <meta name="description" content="Javascript数据结构 – 栈 stack">
+
+  <link rel="stylesheet" href="/DataStructure/css/main.css">
+  <link rel="canonical" href="http://isliuwei.com/DataStructure/jekyll/update/2016/08/17/%E6%A0%88-stack.html">
+  <link rel="alternate" type="application/rss+xml" title="DataStructure & Javascript" href="http://isliuwei.com/DataStructure/feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/DataStructure/">DataStructure & Javascript</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/DataStructure/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Javascript数据结构 -- 栈 stack</h1>
+    <p class="post-meta"><time datetime="2016-08-17T11:02:45+08:00" itemprop="datePublished">Aug 17, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h3 id="javascript-----stack">Javascript数据结构 – 栈 stack</h3>
+
+<h4 id="adt">栈的抽象数据类型定义 ADT</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>属性 / 方法</th>
+      <th style="text-align: right">作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>top</td>
+      <td style="text-align: right">记录栈顶元素的位置</td>
+    </tr>
+    <tr>
+      <td>push</td>
+      <td style="text-align: right">元素入栈</td>
+    </tr>
+    <tr>
+      <td>pop</td>
+      <td style="text-align: right">元素出栈</td>
+    </tr>
+    <tr>
+      <td>peek</td>
+      <td style="text-align: right">返回栈顶元素</td>
+    </tr>
+    <tr>
+      <td>clear</td>
+      <td style="text-align: right">清除栈内所有元素</td>
+    </tr>
+    <tr>
+      <td>length</td>
+      <td style="text-align: right">栈内元素的个数</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="stack-">Stack 类的实现</h4>
+
+<p><code class="highlighter-rouge">Stack 类的构造函数</code></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Stack</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">push</span> <span class="o">=</span> <span class="nx">push</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">pop</span> <span class="o">=</span> <span class="nx">pop</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">peek</span> <span class="o">=</span> <span class="nx">peek</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">length</span><span class="p">;</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="nx">clear</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">🇨🇳 push: 入栈 - 向栈中压入一个元素</code></p>
+
+<blockquote>
+  <p>当向栈中压入一个新元素时,需要将其保存在数组中变量 top 所对应的位置,然后将 top 值加 1,让其指向数组中下一个空位置。这里要特别注意 ++ 操作符的位置,它放在 this.top 的后面,这样新入栈的元素就被放在 top 的当前值对应的位置,然后再将变量 top 的值加 1,指向下一个位置。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+	<span class="p">}</span>
+	</code></pre></figure>
+
+<p><code class="highlighter-rouge">🇨🇳 pop: 出栈 - 元素出栈并返回栈顶元素</code></p>
+
+<blockquote>
+  <p>pop() 方法恰好与 push() 方法相反——它返回栈顶元素,同时将变量 top 的值减 1。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">pop</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="o">--</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="p">];</span>
+	<span class="p">}</span>
+	</code></pre></figure>
+
+<p><code class="highlighter-rouge">🇨🇳 peek: 返回栈顶元素</code></p>
+
+<blockquote>
+  <p>返回数组的第 top-1 个位置的元素,即栈顶元素。如果对一个空栈调用 peek() 方法,结果为 undefined。这是因为栈是空的,栈顶没有任何
+元素。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">peek</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+	<span class="p">}</span>
+	</code></pre></figure>
+
+<p><code class="highlighter-rouge">🇨🇳 length: 返回栈的长度</code></p>
+
+<blockquote>
+  <p>length() 方法通过返回变量 top 值的方式返回栈 内的元素个数。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">length</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+	<span class="p">}</span>
+	</code></pre></figure>
+
+<p><code class="highlighter-rouge">🇨🇳 clear: 清空栈</code></p>
+
+<blockquote>
+  <p>可以将变量 top 的值设为 0,清空一个栈。</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">clear</span><span class="p">(){</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+	</code></pre></figure>
+
+<h4 id="stack--1">Stack 类的完整实现</h4>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">	<span class="kd">function</span> <span class="nx">Stack</span><span class="p">(){</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span> <span class="o">=</span> <span class="p">[];</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">push</span> <span class="o">=</span> <span class="nx">push</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">pop</span> <span class="o">=</span> <span class="nx">pop</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">peek</span> <span class="o">=</span> <span class="nx">peek</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">length</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">clear</span> <span class="o">=</span> <span class="nx">clear</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">function</span> <span class="nx">push</span><span class="p">(</span><span class="nx">element</span><span class="p">){</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nx">element</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">function</span> <span class="nx">pop</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="o">--</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="p">];</span>
+	<span class="p">}</span>
+
+	<span class="kd">function</span> <span class="nx">peek</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataStore</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+	<span class="p">}</span>
+
+	<span class="kd">function</span> <span class="nx">length</span><span class="p">(){</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kd">function</span> <span class="nx">clear</span><span class="p">(){</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+
+
+	<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"David"</span><span class="p">);</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"Raymond"</span><span class="p">);</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"Bryan"</span><span class="p">);</span>
+	<span class="nx">print</span><span class="p">(</span><span class="s2">"length: "</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">());</span>
+	<span class="nx">print</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peek</span><span class="p">());</span>
+	<span class="kd">var</span> <span class="nx">popped</span> <span class="o">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+	<span class="nx">print</span><span class="p">(</span><span class="s2">"The popped element is: "</span> <span class="o">+</span> <span class="nx">popped</span><span class="p">);</span>
+	<span class="nx">print</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peek</span><span class="p">());</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"Cynthia"</span><span class="p">);</span>
+	<span class="nx">print</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peek</span><span class="p">());</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+	<span class="nx">print</span><span class="p">(</span><span class="s2">"length: "</span> <span class="o">+</span> <span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">());</span>
+	<span class="nx">print</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peek</span><span class="p">());</span>
+	<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"Clayton"</span><span class="p">);</span>
+	<span class="nx">print</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peek</span><span class="p">());</span>
+
+	
+	<span class="cm">/****************显示结果****************/</span>
+		<span class="nl">length</span><span class="p">:</span> <span class="mi">3</span>
+		<span class="nx">Bryan</span>
+		<span class="nx">The</span> <span class="nx">popped</span> <span class="nx">element</span> <span class="nx">is</span><span class="err">:</span> <span class="nx">Bryan</span>
+		<span class="nx">Raymond</span>
+		<span class="nx">Cynthia</span>
+		<span class="nl">length</span><span class="p">:</span> <span class="mi">0</span>
+		<span class="kc">undefined</span>
+		<span class="nx">Clayton</span>
+	<span class="cm">/*************************************/</span>
+
+	</code></pre></figure>
+
+<h4 id="stack">使用Stack类</h4>
+
+<h4 id="section">数制间的相互转换</h4>
+
+<p><code class="highlighter-rouge">利用栈将一个数字从一种数制转换成另一种数制。假设想将数字 n 转换为以 b 为基数的数字,实现转换的算法如下。
+(1) 最高位为 n % b,将此位压入栈。
+(2) 使用n/b代替n。
+(3) 重复步骤 1 和 2,直到 n 等于 0,且没有余数。
+(4) 持续将栈内元素弹出,直到栈为空,依次将这些元素排列,就得到转换后数字的字符串形式。</code></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">mulBase</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="nx">base</span><span class="p">){</span>
+	<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+	<span class="k">do</span><span class="p">{</span>
+		<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">num</span><span class="o">%</span><span class="nx">base</span><span class="p">);</span>
+		<span class="nx">num</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">num</span><span class="o">/</span><span class="nx">base</span><span class="p">);</span>
+	<span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="nx">num</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+
+	<span class="kd">var</span> <span class="nx">converted</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+		<span class="nx">converted</span><span class="o">+=</span><span class="nx">s</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">converted</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*****测试*****/</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numBase</span><span class="p">(</span><span class="mi">125</span><span class="p">,</span><span class="mi">8</span><span class="p">));</span>	<span class="c1">//	显示 175</span></code></pre></figure>
+
+<h4 id="section-1">回文</h4>
+
+<p><code class="highlighter-rouge">使用栈,可以轻松判断一个字符串是否是回文。我们将拿到的字符串的每个字符按从左至 右的顺序压入栈。当字符串中的字符都入栈后,栈内就保存了一个反转后的字符串,最后 的字符在栈顶,第一个字符在栈底,字符串完整压入栈内后,通过持续弹出栈中的每个字母就可以得到一个新字符串,该字符 串刚好与原来的字符串顺序相反。我们只需要比较这两个字符串即可,如果它们相等,就 是一个回文。</code></p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">isPalindrome</span><span class="p">(</span><span class="nx">word</span><span class="p">){</span>
+
+	<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">word</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">word</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+	<span class="p">}</span>
+	
+	<span class="kd">var</span> <span class="nx">rword</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+		<span class="nx">rword</span><span class="o">+=</span><span class="nx">s</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+
+	<span class="p">}</span>
+
+	<span class="k">if</span><span class="p">(</span><span class="nx">word</span> <span class="o">===</span> <span class="nx">rword</span><span class="p">){</span>
+		<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*****测试*****/</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isPalindrome</span><span class="p">(</span><span class="s1">'abccba'</span><span class="p">));</span>	<span class="c1">//	显示 true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isPalindrome</span><span class="p">(</span><span class="s1">'abcddcab'</span><span class="p">));</span>	<span class="c1">//	显示 false</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">fact</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">num</span> <span class="o">===</span> <span class="mi">1</span> <span class="o">||</span> <span class="nx">num</span> <span class="o">===</span> <span class="mi">0</span><span class="p">){</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+		<span class="k">return</span> <span class="nx">num</span><span class="o">*</span><span class="nx">fact</span><span class="p">(</span><span class="nx">num</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">function</span> <span class="nx">fact</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
+
+	<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+
+	<span class="k">while</span><span class="p">(</span><span class="nx">num</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">){</span>
+		<span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">num</span><span class="o">--</span> <span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="k">while</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+		<span class="nx">result</span><span class="o">*=</span><span class="nx">s</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<h4 id="section-2">递归演示</h4>
+
+<h5 id="section-3">使用栈实现递归</h5>
+
+<p>递归实现阶乘</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/*****  递归实现阶乘  *****/</span>
+<span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">n</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span><span class="o">*</span><span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>	<span class="c1">//	显示 120</span>
+
+
+
+<span class="cm">/*****  递归实现斐波那契数列  *****/</span>
+<span class="kd">function</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">n</span><span class="o">==</span><span class="mi">1</span><span class="o">||</span><span class="nx">n</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fib</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>	<span class="c1">//	显示 55</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/*****  使用栈模拟递归过程   *****/</span>
+<span class="kd">function</span> <span class="nx">fact</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stack</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="nx">n</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">s</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">n</span><span class="o">--</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    
+    <span class="k">while</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">length</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nx">result</span><span class="o">*=</span><span class="nx">s</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>  
+<span class="p">}</span></code></pre></figure>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">DataStructure & Javascript</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>DataStructure & Javascript</li>
+          <li><a href="mailto:lw.588@163.com">lw.588@163.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/isliuwei"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">isliuwei</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/nce16220811"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">nce16220811</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
