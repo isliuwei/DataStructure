@@ -26,7 +26,9 @@ categories: jekyll update
 
 ### 1.11 使用解构赋值简化代码
 
-[1.1 在数组中搜索]: /DataStructure/jekyll/sublink/2016/08/10/将一个二维数组扁平化.html
+
+[1.1 在数组中搜索]: /DataStructure/jekyll/sublink/2016/08/14/在数组中搜索.html
+
 
 [1.2 将一个二维数组扁平化]: /DataStructure/jekyll/sublink/2016/08/10/将一个二维数组扁平化.html
 
